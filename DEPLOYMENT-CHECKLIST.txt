@@ -1,0 +1,35 @@
+ASMI-CAMEROUN WEBSITE V8 — DEPLOYMENT CHECKLIST (Netlify)
+
+A. DEPLOY (the live fundraising counter needs functions, so NOT drag-and-drop)
+ 1. Push this folder to a GitHub/GitLab repository and connect it in Netlify
+    (Add new site > Import from Git). Build command: none. Publish directory: .
+    Alternative: Netlify CLI: npm i -g netlify-cli && netlify deploy --prod
+ 2. Site settings > Environment variables: add ADMIN_TOKEN = a long random password
+    (it protects /treasurer.html). Redeploy after adding it.
+ 3. Domain management: set asmi-cameroun.org as primary, www redirecting to it, HTTPS on.
+    Keep the previous deployment available for rollback; do not change DNS beyond that.
+ 4. Forms: after the first deploy open Forms in Netlify and confirm these appear:
+    general-enquiry, institutional-support, volunteer-interest and the three "-fr" versions.
+    Add an email notification to contact@asmi-cameroun.org for each.
+
+B. VERIFY AFTER DEPLOY
+ - /  and  /fr/  ,  /institutional-information  ,  /survey.html  ,  /fr/enquete.html
+ - /api/campaign returns JSON (live counter works, no "preview mode" label)
+ - /treasurer.html opens only with the ADMIN_TOKEN; confirm a test pledge, then remove the test
+ - Cookie banner appears once on a new browser; Accept and Decline both close it
+ - Both KoboToolbox surveys open and embed
+ - EN/FR switch and mobile menu
+ - Footer on any page shows exactly:
+     Email: contact@asmi-cameroun.org
+     Calls: +237 6 50 80 17 59
+     WhatsApp: +237 692 01 13 34
+     Address: Baressoumtou Aviation, Nkongsamba 3e, Moungo Division, Littoral Region, Cameroon
+     Récépissé N° 051/RDA/C16/SASC.- du 10 septembre 2026
+ - https://securityheaders.com shows the headers from _headers
+
+C. SEARCH
+ - Submit https://asmi-cameroun.org/sitemap.xml in Google Search Console.
+ - 404, thank-you and treasurer pages are noindex by design.
+
+D. KEEP PRIVATE
+ Never publish survivor data, identity numbers or private case locations through the website.

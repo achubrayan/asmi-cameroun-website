@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /treasurer.html
+Disallow: /api/
+
+Sitemap: https://asmi-cameroun.org/sitemap.xml
