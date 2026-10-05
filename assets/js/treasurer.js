@@ -1,0 +1,10 @@
+(()=>{const $=s=>document.querySelector(s),nf=new Intl.NumberFormat('en-US');let tok=sessionStorage.getItem('asmiTok')||'';$('#tk').value=tok;
+const msg=(t,ok)=>{const m=$('#tmsg');m.textContent=t;m.className='pl-msg '+(ok?'ok':'bad')};
+const call=async b=>{const r=await fetch('/api/treasurer',{method:'POST',headers:{'content-type':'application/json','x-admin-token':tok},body:JSON.stringify(b)});if(r.status===401)throw new Error('Wrong token');if(!r.ok)throw new Error('Request failed');return r.json()};
+const td=(t)=>{const e=document.createElement('td');e.textContent=t;return e};
+const draw=d=>{const s=$('#tsum');s.hidden=false;s.textContent='Confirmed: '+nf.format(d.confirmed)+' FCFA · Pledged (awaiting payment): '+nf.format(d.pledged)+' FCFA · Target: '+nf.format(d.target)+' FCFA';
+const tb=$('#rows');tb.textContent='';d.pledges.forEach(p=>{const tr=document.createElement('tr');tr.append(td(new Date(p.ts).toLocaleString('en-GB')),td(p.name+(p.public?' (public)':'')),td(p.contact),td(nf.format(p.amount)),td(p.status));const a=document.createElement('td');
+if(p.status==='pending'){[['confirm','Money received','btn btn-primary btn-small'],['decline','Decline','btn btn-outline btn-small']].forEach(([k,t,c])=>{const b=document.createElement('button');b.className=c;b.textContent=t;b.onclick=()=>act({action:k,id:p.id});a.append(b)})}tr.append(a);tb.append(tr)})};
+const act=async b=>{try{draw(await call(b));msg('Done.',true)}catch(e){msg(e.message,false)}};
+$('#load').onclick=()=>{tok=$('#tk').value.trim();sessionStorage.setItem('asmiTok',tok);act({action:'list'})};
+$('#off').onclick=async()=>{const a=Number($('#oa').value);if(!(a>0))return msg('Enter an amount',false);await act({action:'offline',amount:a,note:$('#on').value});$('#oa').value='';$('#on').value=''}})();
