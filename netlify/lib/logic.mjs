@@ -1,11 +1,13 @@
 // Campaign logic, kept separate from the Netlify wrapper so it can be tested without a server.
-const BASE = { confirmedBase: 107000, target: 700000, baseDate: '2026-09-20' };
+const BASE = { confirmedBase: 107000, target: 2880000, baseDate: '2026-09-20' }; // target: US$5,000 at 576 FCFA
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
 const clean = (v, n) => String(v ?? '').replace(/[<>\u0000-\u001f]/g, '').trim().slice(0, n);
 const sum = (a) => a.reduce((t, x) => t + x.amount, 0);
 
 export async function load(store) {
-  return (await store.get('state', { type: 'json' })) || { ...BASE, pledges: [], offline: [], updated: null };
+  const s = (await store.get('state', { type: 'json' })) || { ...BASE, pledges: [], offline: [], updated: null };
+  s.target = BASE.target; // the target always follows BASE, even once state has been saved
+  return s;
 }
 const save = (store, s) => { s.updated = new Date().toISOString(); return store.setJSON('state', s); };
 
