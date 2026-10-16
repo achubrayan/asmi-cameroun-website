@@ -98,7 +98,7 @@ Every image on the site was reviewed. Findings:
 3. **"Founder" title.** The About page labels the President "President / Executive Director / Founder". "Founder" is not one of the statutory office titles used on the new page.
 4. **"Data Sentinel Initiative" tagline.** It appears about 68 times (header, footer, hero tags). It is a programme name, not part of the registered name, so it was left alone. Decide whether it should stay beside the legal name.
 5. **No French version of the new page.** French pages link to the English page; the link text stays in English as in the brief.
-6. **Contact details on the statutes letterhead** (asmi.cameroun@gmail.com and other numbers) differ from the official details on the site. You confirmed the site details are correct; the statutes are unchanged.
+6. **Contact details on the statutes letterhead** (the founding Gmail address and other numbers) differ from the official details on the site. You confirmed the site details are correct; the statutes are unchanged.
 7. **Safeguarding policy files.** The v1.0 PDF on the site and the v1.1 draft still use the old receipt number without ".-" and the old phone spacing "+237 6 92 01 13 34".
 8. **Team photos.** Still to confirm that they are real photographs (see V7.3).
 
